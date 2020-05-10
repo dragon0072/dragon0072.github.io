@@ -15,8 +15,11 @@
 <meta property="og:description" content="Jenkins 使用一. 系统要求 最低要求 RAM &gt; 256M,DISK &gt; 1G  最小化团队 RAM &gt; 1G,DISK &gt; 50G+    二. 安装1. 安装Jenkins 快捷安装 1docker run --name jenkins -itd -p 8080:8080 -p 50000:50000 jenkins&#x2F;jenkins:lts  使用docker-">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/2020/05/09/Jenkins/image-20200509101645975.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/09/Jenkins/image-20200510214150990.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/09/Jenkins/image-20200510214548129.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/09/Jenkins/image-20200510214305886.png">
 <meta property="article:published_time" content="2020-05-09T01:39:21.000Z">
-<meta property="article:modified_time" content="2020-05-10T11:36:01.576Z">
+<meta property="article:modified_time" content="2020-05-10T13:46:05.149Z">
 <meta property="article:author" content="damon chan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/05/09/Jenkins/image-20200509101645975.png">
@@ -170,23 +173,24 @@
 <li><p>在<code>授权策略</code>中，选中<code>Gitlab Commiter Authorization Strategy</code></p>
 </li>
 <li><p>配置 <code>Gitlab Authorization Settings</code></p>
-
+<img src="/2020/05/09/Jenkins/image-20200510214150990.png" class="">
 
 <p><em>注意：</em></p>
 <p>​     <em>1. <code>Admin User Names</code> 必须和 Gitlab 超级管理员的 <code>UserName</code>对应，否则会丢失超级管理员权限</em></p>
 </li>
 <li><p>在安全域中，选中 <code>Gitlab Authentication Plugin</code></p>
-
+<img src="/2020/05/09/Jenkins/image-20200510214548129.png" class="">
 
 <p><em>注意：</em></p>
 <p>​    <em>1.<code>Client ID</code>和<code>Client Secret</code>要在Gitlab中获取</em></p>
 <p>​    <em>2. <code>GitLab Web URI</code>和<code>GitLab API URI</code>为<code>GitLab链接</code></em></p>
 </li>
 <li><p>进入<code>Gitlab</code>，选择<code>管理中心</code>，进入<code>应用</code>，并新增应用</p>
-
+<img src="/2020/05/09/Jenkins/image-20200510214305886.png" class="">
 
 <p>注意：</p>
 <pre><code>1.  重定向URI 为：`&lt;jenkins地址&gt;/securityRealm/finishLogin`
+
  2.  必须要选中api</code></pre></li>
 <li><p>这时，我们会获取到<code>Client ID</code>和 <code>Client Secret</code></p>
 </li>
@@ -199,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/09/Jenkins/" data-id="cka13mph80001v7ag3kinf0n1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/05/09/Jenkins/" data-id="cka142xxs00017jag8fmc9wfj" class="article-share-link">Share</a>
       
       
     </footer>
