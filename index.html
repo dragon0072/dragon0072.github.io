@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Damon&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Damon&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Damon&#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="damon chan">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Damon&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Damon&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-jenkins-gitlab" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/10/jenkins-gitlab/" class="article-date">
+  <time datetime="2020-05-10T11:01:43.000Z" itemprop="datePublished">2020-05-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/10/jenkins-gitlab/">jenkins&amp;gitlab</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Jenkins-Gitlab-自动化工程"><a href="#Jenkins-Gitlab-自动化工程" class="headerlink" title="Jenkins + Gitlab 自动化工程"></a>Jenkins + Gitlab 自动化工程</h1><ol>
+<li><p>创建<code>Gitlab</code>项目</p>
+</li>
+<li><p>进入<code>Jenkins</code>,进入<code>凭据</code>,创建<code>全局凭据</code></p>
+</li>
+<li><p><code>类型</code> 选择 <code>SSH UserName with private key</code></p>
+</li>
+<li><p>输入<code>UserName</code>和<code>Private Key</code></p>
+<p><em>注意：</em></p>
+<ul>
+<li><code>Private Key</code>为秘钥对中的<code>私钥</code></li>
+<li>生成秘钥对<code>ssh-keygen -t rsa -b 4096 -C &quot;&lt;备注&gt;&quot;</code></li>
+</ul>
+</li>
+<li><p>在Gitlab中添加<code>公钥</code></p>
+<ul>
+<li>在项目中添加<ul>
+<li>进入<code>项目 &gt; 设置 &gt; CI / CD &gt; Deploy Keys</code></li>
+<li>录入<code>名称</code>和<code>公钥</code></li>
+</ul>
+</li>
+<li>在管理中心中添加<ul>
+<li>进入<code>管理中心 &gt; 部署密钥</code></li>
+<li>点击<code>新建部署密钥</code></li>
+<li>录入<code>名称</code>和<code>公钥</code></li>
+<li>进入<code>项目 &gt; 设置 &gt; CI / CD &gt; Deploy Keys &gt; 公开访问的部署密钥</code></li>
+<li>把刚添加的<code>密钥</code>点击启用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>复制<code>GitLab</code>项目地址</p>
+</li>
+<li><p>进入<code>Jenkins</code>，新建任务</p>
+</li>
+<li><p>在<code>源码管理中</code>选择<code>Git</code></p>
+</li>
+<li><p><code>Repository URL</code>中，录入<code>GitLab</code>项目地址</p>
+</li>
+<li><p><code>Credentials</code>中，选择刚录入的<code>全局凭据</code></p>
+</li>
+<li><p>配置<code>构建触发器</code></p>
+<ul>
+<li>选择<code>Build when a change is pushed to GitLab.</code></li>
+<li>点击<code>高级</code>，拉到<code>Secret token</code>,点击<code>Generate</code></li>
+</ul>
+<p><em>注意：</em></p>
+<ol>
+<li>在<code>Build when a change is pushed to GitLab.</code>后方，会生成一个<code>Webhook地址</code></li>
+</ol>
+</li>
+<li><p>进入<code>GitLab</code>项目中，在<code>设置 &gt; Webhooks</code>里面，添加<code>Webhook</code></p>
+<ul>
+<li>在<code>URL</code>中，录入在<code>Jenkins</code>中获取的<code>Webhook地址</code></li>
+<li>在<code>Secret Token</code>中，录入在<code>Jenkins</code>中获取的<code>Secret Token</code></li>
+<li>在<code>Trigger</code>中，勾选<code>Push events</code></li>
+<li>取消勾选<code>Enable SSL verification</code> </li>
+</ul>
+</li>
+<li><p>进入<code>Jenkins</code>任务中，在<code>构建</code>中，选择<code>执行shell</code>，并录入命令<code>echo &#39;hello world&#39;</code></p>
+</li>
+<li><p><code>GitLab</code>项目进行一次提交，这时，能看到<code>Jenkins</code>中，自动执行了一次构建，并输出了<code>hello world</code></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/10/jenkins-gitlab/" data-id="cka13mphe0005v7ag8gmhgzab" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Jenkins" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/09/Jenkins/" class="article-date">
+  <time datetime="2020-05-09T01:39:21.000Z" itemprop="datePublished">2020-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/09/Jenkins/">Jenkins</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Jenkins-使用"><a href="#Jenkins-使用" class="headerlink" title="Jenkins 使用"></a>Jenkins 使用</h1><h2 id="一-系统要求"><a href="#一-系统要求" class="headerlink" title="一. 系统要求"></a>一. 系统要求</h2><ol>
+<li><p>最低要求</p>
+<p><code>RAM &gt; 256M,DISK &gt; 1G</code></p>
+</li>
+<li><p>最小化团队</p>
+<p><code>RAM &gt; 1G,DISK &gt; 50G+</code></p>
+</li>
+</ol>
+<hr>
+<h2 id="二-安装"><a href="#二-安装" class="headerlink" title="二. 安装"></a>二. 安装</h2><h3 id="1-安装Jenkins"><a href="#1-安装Jenkins" class="headerlink" title="1. 安装Jenkins"></a>1. 安装Jenkins</h3><ol>
+<li><p>快捷安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name jenkins -itd -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>docker-compose</code>安装</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">jenkins:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">'jenkins'</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jenkins/jenkins:lts</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">jenkins:994</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"8080:8080"</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"50000:50000"</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"10051:10051"</span></span><br><span class="line">    <span class="attr">volumes:</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">/home/jenkins/data:/var/jenkins_home</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/usr/bin/docker:/usr/bin/docker</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p><strong>安装完成后，需要获取<code>jenkins管理员</code>的初始密码</strong></p>
+<ol>
+<li><p>使用 <code>docker logs -f jenkins</code> 打印日志</p>
+</li>
+<li><p>找到日志中输出的 <code>hash密码</code></p>
+<img src="/2020/05/09/Jenkins/image-20200509101645975.png" class="">
+
+</li>
+</ol>
+<h3 id="2-进入Jenkins界面"><a href="#2-进入Jenkins界面" class="headerlink" title="2. 进入Jenkins界面"></a>2. 进入Jenkins界面</h3><ol>
+<li>在文本框中，输入刚刚获取到的 管理员密码，解锁<code>Jenkins</code></li>
+<li>安装<code>Jenkins</code>插件<ul>
+<li>插件安装方式有两种：<ul>
+<li>离线</li>
+<li>在线</li>
+</ul>
+</li>
+<li>在线安装插件时，有部分插件需要用到<code>谷歌的服务</code>，这时候，需要配置代理。或者使用<code>离线安装</code></li>
+<li>常用插件<ul>
+<li>GitHub</li>
+<li>Git client</li>
+<li>GitLab</li>
+<li>Gitlab Authentication</li>
+<li>PAM Authentication</li>
+<li>Matrix Authorization Strategy</li>
+<li>Role-based Authorization Strategy</li>
+<li>LDAP</li>
+<li>SSH Slaves</li>
+<li>WMI Windows Agents</li>
+<li>Build Timeout</li>
+<li>Dashboard View</li>
+<li>Folders</li>
+<li>ThinBackup</li>
+<li>AnsiColor</li>
+<li>Build With Parameters</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建管理员</li>
+<li>配置全局的<code>Jenkins</code>的回调地址(也是<code>Jenkins</code>的登录地址)</li>
+</ol>
+<hr>
+<h2 id="三-备份Jenkins容器内部数据"><a href="#三-备份Jenkins容器内部数据" class="headerlink" title="三. 备份Jenkins容器内部数据"></a>三. 备份<code>Jenkins</code>容器内部数据</h2><ol>
+<li><p>使用<code>docker commit</code>进行备份</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ① 查找到当前运行的容器</span></span><br><span class="line">docker ps | grep jenkins</span><br><span class="line"><span class="comment"># ② commit 当前容器</span></span><br><span class="line">docker commit &lt;当前容器的ID&gt; &lt;镜像名称&gt; </span><br><span class="line"><span class="comment"># ③ 查看镜像</span></span><br><span class="line">docker images | grep &lt;镜像名称&gt;</span><br><span class="line"><span class="comment"># ④ 重启镜像</span></span><br><span class="line">docker run -itd -v /tmp:/tmp &lt;镜像名称&gt;</span><br><span class="line"><span class="comment"># ⑤ 查看容器名称</span></span><br><span class="line">docker ps | grep &lt;镜像名称&gt;</span><br><span class="line"><span class="comment"># ⑥ 使用交互式终端，连接到容器，使用容器内部的cp命令，把容器内部的/var/jenkins_home目录，拷贝到容器的/tmp目录下</span></span><br><span class="line">docker <span class="built_in">exec</span> -it &lt;容器名称&gt; cp -r /var/jenkins_home /tmp</span><br><span class="line"><span class="comment"># ⑦ 停止并删除容器</span></span><br><span class="line">docker stop &lt;容器名称&gt; &amp;&amp; docker rm &lt;容器名称&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用官方文档方式，进行备份</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm --volumes-from &lt;需要备份的容器名称&gt; -v /tmp/backup:/backup ubuntu tar cvf /backup/backup.tar /var/jenkins_home</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>docker cp</code>命令，快速备份</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ① 查看容器ID</span></span><br><span class="line">docker ps | grep &lt;容器名称&gt;</span><br><span class="line"><span class="comment"># ② 复制容器内部的 /var/jenkins_home 目录 到当前的 /tmp/目录下</span></span><br><span class="line">docker cp &lt;容器ID&gt;:/var/jenkins_home /tmp/</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<hr>
+<h2 id="四-Jenkins-使用-Gitlab-登录"><a href="#四-Jenkins-使用-Gitlab-登录" class="headerlink" title="四. Jenkins 使用 Gitlab 登录"></a>四. <code>Jenkins</code> 使用 <code>Gitlab</code> 登录</h2><ol>
+<li><p>进入<code>系统控制 &gt; 全局安全配置</code></p>
+</li>
+<li><p>在<code>授权策略</code>中，选中<code>Gitlab Commiter Authorization Strategy</code></p>
+</li>
+<li><p>配置 <code>Gitlab Authorization Settings</code></p>
+
+
+<p><em>注意：</em></p>
+<p>​     <em>1. <code>Admin User Names</code> 必须和 Gitlab 超级管理员的 <code>UserName</code>对应，否则会丢失超级管理员权限</em></p>
+</li>
+<li><p>在安全域中，选中 <code>Gitlab Authentication Plugin</code></p>
+
+
+<p><em>注意：</em></p>
+<p>​    <em>1.<code>Client ID</code>和<code>Client Secret</code>要在Gitlab中获取</em></p>
+<p>​    <em>2. <code>GitLab Web URI</code>和<code>GitLab API URI</code>为<code>GitLab链接</code></em></p>
+</li>
+<li><p>进入<code>Gitlab</code>，选择<code>管理中心</code>，进入<code>应用</code>，并新增应用</p>
+
+
+<p>注意：</p>
+<pre><code>1.  重定向URI 为：`&lt;jenkins地址&gt;/securityRealm/finishLogin`
+ 2.  必须要选中api</code></pre></li>
+<li><p>这时，我们会获取到<code>Client ID</code>和 <code>Client Secret</code></p>
+</li>
+<li><p>将得到的<code>Client ID</code>和<code>Client Secret</code>填充到<code>Jenkins</code>的安全域配置中</p>
+</li>
+</ol>
+<p><em>注意：</em></p>
+<p>​    <em>1.此时，如果还是无法登陆，需要在<code>Gitlab</code>的 <code>管理中心 &gt; 网络 &gt; 外发请求</code> 中，把<code>&lt;允许Webhook和服务对本地网络的请求&gt;</code>勾选上。</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/09/Jenkins/" data-id="cka13mph80001v7ag3kinf0n1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ESLint" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/08/ESLint/" class="article-date">
+  <time datetime="2020-05-08T06:37:43.000Z" itemprop="datePublished">2020-05-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/08/ESLint/">ESLint</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ESLint-使用"><a href="#ESLint-使用" class="headerlink" title="ESLint 使用"></a>ESLint 使用</h1><p><code>注意：Node.js version ^6.14  npm version ^3</code></p>
+<h2 id="1-安装ESLint"><a href="#1-安装ESLint" class="headerlink" title="1. 安装ESLint"></a>1. 安装ESLint</h2><ol>
+<li><p>安装 ESLint</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D eslint</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./node_modules/.bin/eslint --init <span class="comment"># 或者 npx eslint init</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行 ESLint</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./node_modules/.bin/eslint yourfile.js <span class="comment"># 或者 npx eslint yourfile.js</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="2-ESLint-规则和配置"><a href="#2-ESLint-规则和配置" class="headerlink" title="2. ESLint 规则和配置"></a>2. ESLint 规则和配置</h2><ol>
+<li><p>rules 配置</p>
+<p><code>rules是配置ESLint的验证规则</code></p>
+<ul>
+<li>以字符串数组的形式，配置各种规则<ul>
+<li>下标为 <code>0</code> 的字符串，配置当前规则是否启用</li>
+<li>下标为 <code>1</code> 的字符串，配置当前规则的逻辑</li>
+</ul>
+</li>
+<li>每个规则，必须配置为下列三个选项中的一个<ul>
+<li><code>off</code>或<code>0</code> - 关闭规则</li>
+<li><code>warn</code> 或 <code>1</code> - 开启规则，使用警告级别的错误（<code>不会导致程序退出</code>）</li>
+<li><code>error</code> 或 <code>2</code> - 开启规则，使用错误级别的错误（<code>当被触发时，程序会退出</code>）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>extends </p>
+<p><code>一个配置文件可以被基础配置中的已启用的规则继承。</code></p>
+<ul>
+<li><p>例如 <code>如果要使用 vue 的默认规则</code></p>
+<ul>
+<li><p>首先，安装 vue 规则的 ESLint 插件</p>
+<p>使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue add @vue/cli-plugin-eslint</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D eslint eslint-plugin-vue</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后，在配置文件里面，引用插件</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">extends:[</span><br><span class="line">  'plugin:vue/recommended'</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/08/ESLint/" data-id="cka13mph40000v7ag5mtt7yfe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hexo-install" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/07/hexo-install/" class="article-date">
+  <time datetime="2020-05-07T14:17:02.182Z" itemprop="datePublished">2020-05-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/07/hexo-install/">hexo 配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用hexo-git-实现简易-Blog"><a href="#使用hexo-git-实现简易-Blog" class="headerlink" title="使用hexo + git 实现简易 Blog"></a>使用hexo + git 实现简易 Blog</h1><h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><ol>
+<li><p>全局安装hexo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-cli -g</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移动到存放 blog 内容的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> &lt;目录&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成 blog 目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;目录名称&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移动到 blog 目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> &lt;blog 目录&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 hexo 依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动 hexo 服务，查看效果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h2 id="安装-hexo-deployer-git"><a href="#安装-hexo-deployer-git" class="headerlink" title="安装 hexo-deployer-git"></a>安装 hexo-deployer-git</h2><ol>
+<li><p>安装 hexo-deployer-git</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 <code>_config.yml</code> 中配置插件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">&lt;repository</span> <span class="string">url&gt;</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">[branch]</span></span><br><span class="line">  <span class="attr">token:</span> <span class="string">''</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">[message]</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">[git</span> <span class="string">user]</span></span><br><span class="line">  <span class="attr">email:</span> <span class="string">[git</span> <span class="string">email]</span></span><br><span class="line">  <span class="attr">extend_dirs:</span> <span class="string">[extend</span> <span class="string">directory]</span></span><br><span class="line">  <span class="attr">ignore_hidden:</span> <span class="literal">false</span> <span class="comment"># default is true</span></span><br><span class="line">  <span class="attr">ignore_pattern:</span> <span class="string">regexp</span>  <span class="comment"># whatever file that matches the regexp will be ignored when deploying</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>发布 blog </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/07/hexo-install/" data-id="cka13mphc0003v7ag40zgdck9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git-lab" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/07/git-lab/" class="article-date">
+  <time datetime="2020-05-07T08:06:19.000Z" itemprop="datePublished">2020-05-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/07/git-lab/">git-lab安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用docker-安装git-lab"><a href="#使用docker-安装git-lab" class="headerlink" title="使用docker 安装git-lab"></a>使用docker 安装git-lab</h1><h2 id="快捷安装"><a href="#快捷安装" class="headerlink" title="快捷安装"></a>快捷安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run --detach \ <span class="comment"># 后台运行</span></span><br><span class="line">  --hostname gitlab.example.com \ <span class="comment"># 指定域名</span></span><br><span class="line">  --publish 443:443 --publish 80:80 --publish 22:22 \ <span class="comment"># 开放端口： 443（https端口） 80（默认服务访问端口） 22（克隆仓库端口）</span></span><br><span class="line">  --name gitlab \ <span class="comment"># 镜像名称</span></span><br><span class="line">  --restart always \ <span class="comment">#是否自动重启</span></span><br><span class="line">  --volume <span class="variable">$GITLAB_HOME</span>/gitlab/config:/etc/gitlab \</span><br><span class="line">  --volume <span class="variable">$GITLAB_HOME</span>/gitlab/logs:/var/<span class="built_in">log</span>/gitlab \</span><br><span class="line">  --volume <span class="variable">$GITLAB_HOME</span>/gitlab/data:/var/opt/gitlab \ <span class="comment"># gitlab数据，映射到宿主机</span></span><br><span class="line">  gitlab/gitlab-ce:latest</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用-docker-compose-安装"><a href="#使用-docker-compose-安装" class="headerlink" title="使用 docker-compose 安装"></a>使用 docker-compose 安装</h2><ol>
+<li><p>使用官方文档中的方式</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">web:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">'gitlab/gitlab-ce:latest'</span></span><br><span class="line">  <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">  <span class="attr">hostname:</span> <span class="string">'gitlab.example.com'</span></span><br><span class="line">  <span class="attr">environment:</span></span><br><span class="line">    <span class="attr">GITLAB_OMNIBUS_CONFIG:</span> <span class="string">|</span></span><br><span class="line">      <span class="string">external_url</span> <span class="string">'https://gitlab.example.com'</span></span><br><span class="line">      <span class="comment"># Add any other gitlab.rb configuration here, each on its own line</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">'80:80'</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">'443:443'</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">'22:22'</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">'$GITLAB_HOME/gitlab/config:/etc/gitlab'</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">'$GITLAB_HOME/gitlab/logs:/var/log/gitlab'</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">'$GITLAB_HOME/gitlab/data:/var/opt/gitlab'</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>使用 github 中的 <a href="https://github.com/sameersbn/docker-gitlab" target="_blank" rel="noopener">docker-gitlab</a> 项目进行创建</p>
+<ul>
+<li>首先，到docker-gitlab项目下，复制docker-compose.yml 文件中的内容</li>
+<li>然后，在文本编辑器中，根据文档提示，配置docker-compose.yml</li>
+<li>最后，将配置信息上传到服务器，并使用 <code>docker-compose up -d</code> 运行git-lab服务</li>
+<li>如果需要设置git-lab备份超时<ul>
+<li><code>在docker-compose.yml文件中，添加 - GITLAB_BACKUP_EXPIRY=604800 #这个参数，是以秒为单位。当前设置的604800，实际是表示7天。</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="服务成功启动，但访问网页，出现502报错"><a href="#服务成功启动，但访问网页，出现502报错" class="headerlink" title="服务成功启动，但访问网页，出现502报错"></a>服务成功启动，但访问网页，出现502报错</h2><p>那大概率为git-lab占用大量cpu，和内存。导致服务器崩溃。</p>
+<ol>
+<li><p>可尝试启用<code>swap</code>分区进行处理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.查看swap分区是否启动（无）</span></span><br><span class="line">cat /proc/swaps </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.创建</span></span><br><span class="line">dd <span class="keyword">if</span>=/dev/zero of=/data/swap bs=512 count=8388616 </span><br><span class="line"><span class="comment">#创建swap大小为bs*count=4294971392(4G)；</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.通过mkswap命令将上面新建出的文件做成swap分区</span></span><br><span class="line">mkswap /data/swap </span><br><span class="line"></span><br><span class="line"><span class="comment"># 4.查看内核参数vm.swappiness中的数值是否为0，如果为0则根据实际需要调整成60</span></span><br><span class="line">cat /proc/sys/vm/swappiness <span class="comment"># 查看</span></span><br><span class="line">sysctl -w vm.swappiness=60 <span class="comment"># 设置</span></span><br><span class="line"><span class="comment"># 若想永久修改，则编辑/etc/sysctl.conf文件，改文件中有vm.swappiness变量配置，默认为0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5.启用分区</span></span><br><span class="line">swapon /data/swap</span><br><span class="line"><span class="built_in">echo</span> “/data/swap swap swap defaults 0 0” &gt;&gt; /etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6.再次使用cat /proc/swaps 查看swap分区是否启动</span></span><br><span class="line"><span class="comment"># 重启gitlab。</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li>提升服务器配置，最少达到 <code>2核4G</code> </li>
+</ol>
+<p><code>经测试，1核2G的服务器。在启用swap后，等待一段时间，可以访问gitlab。</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/07/git-lab/" data-id="cka13mpha0002v7aggel2copu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/07/git/" class="article-date">
+  <time datetime="2020-05-07T03:07:27.000Z" itemprop="datePublished">2020-05-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/07/git/">Git 学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Git-学习"><a href="#Git-学习" class="headerlink" title="Git 学习"></a>Git 学习</h1><h2 id="Git-基础"><a href="#Git-基础" class="headerlink" title="Git 基础"></a>Git 基础</h2><img src="/2020/05/07/git/image-20200507110958159.png" class="">
+
+
+
+<h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> <span class="comment">#查看提交日志</span></span><br><span class="line"></span><br><span class="line">git reflog <span class="comment">#查看本地日志</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-Git"><a href="#配置-Git" class="headerlink" title="配置 Git"></a>配置 Git</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git config --global --list <span class="comment">#查看全局git配置</span></span><br><span class="line"></span><br><span class="line">git config --global user.name <span class="string">"&lt;名字&gt;"</span> <span class="comment">#配置上传时的名称</span></span><br><span class="line"></span><br><span class="line">git config --global user.email <span class="string">"&lt;邮箱&gt;"</span> <span class="comment">#配置上传时，使用的邮箱</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Git-拉取修改"><a href="#Git-拉取修改" class="headerlink" title="Git 拉取修改"></a>Git 拉取修改</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master <span class="comment">#从远程仓库拉取修改，并覆盖本地</span></span><br><span class="line"></span><br><span class="line">git fetch <span class="comment">#从远程仓库拉取修改，并不覆盖本地</span></span><br><span class="line">git merge FECH_HEAD <span class="comment">#将从远程仓库拉取的修改，合并到当前分支</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Git-提交修改"><a href="#Git-提交修改" class="headerlink" title="Git 提交修改"></a>Git 提交修改</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git add . <span class="comment">#需要暂存的文件</span></span><br><span class="line"></span><br><span class="line">git commit -m <span class="string">"&lt;备注&gt;"</span> <span class="comment">#将暂存的文件提交，并添加备注</span></span><br><span class="line"></span><br><span class="line">git push origin master <span class="comment">#将提交的文件，推送到 服务 origin 的 master分支上</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="回退提交"><a href="#回退提交" class="headerlink" title="回退提交"></a>回退提交</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard head^ <span class="comment">#回退到上一次提交</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="缓存-Git"><a href="#缓存-Git" class="headerlink" title="缓存 Git"></a>缓存 Git</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git stash <span class="comment">#将当前修改文件，缓存下来。并回退到干净的工作区</span></span><br><span class="line"></span><br><span class="line">git stash apply <span class="comment">#将缓存中的文件，放回工作区</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="查看当前修改"><a href="#查看当前修改" class="headerlink" title="查看当前修改"></a>查看当前修改</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure>
+
+<h2 id="丢弃工作区的改动"><a href="#丢弃工作区的改动" class="headerlink" title="丢弃工作区的改动"></a>丢弃工作区的改动</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除本地缓存的快照"><a href="#删除本地缓存的快照" class="headerlink" title="删除本地缓存的快照"></a>删除本地缓存的快照</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached -r .</span><br></pre></td></tr></table></figure>
+
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><ol>
+<li><p>查看分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git branch &lt;分支名称&gt; <span class="comment">#仅创建分支，不切换到新创建的分支上</span></span><br><span class="line"></span><br><span class="line">git checkout -b &lt;分支名称&gt; <span class="comment">#创建并切换到 &lt;分支名称&gt; 分支</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -D &lt;分支名称&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换分支 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;分支名称&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>合并分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge &lt;分支名称&gt; <span class="comment">#可与git fetch配合使用</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/07/git/" data-id="cka13mphd0004v7aggd03cd6f" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/05/10/jenkins-gitlab/">jenkins&amp;gitlab</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/09/Jenkins/">Jenkins</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/08/ESLint/">ESLint</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/07/hexo-install/">hexo 配置</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/07/git-lab/">git-lab安装</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 damon chan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

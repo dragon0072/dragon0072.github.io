@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>jenkins&amp;gitlab | Damon&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Jenkins + Gitlab 自动化工程 创建Gitlab项目  进入Jenkins,进入凭据,创建全局凭据  类型 选择 SSH UserName with private key  输入UserName和Private Key 注意：  Private Key为秘钥对中的私钥 生成秘钥对ssh-keygen -t rsa -b 4096 -C &quot;&lt;备注&gt;&quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jenkins&amp;gitlab">
+<meta property="og:url" content="http://yoursite.com/2020/05/10/jenkins-gitlab/index.html">
+<meta property="og:site_name" content="Damon&#39;s Blog">
+<meta property="og:description" content="Jenkins + Gitlab 自动化工程 创建Gitlab项目  进入Jenkins,进入凭据,创建全局凭据  类型 选择 SSH UserName with private key  输入UserName和Private Key 注意：  Private Key为秘钥对中的私钥 生成秘钥对ssh-keygen -t rsa -b 4096 -C &quot;&lt;备注&gt;&quot;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-10T11:01:43.000Z">
+<meta property="article:modified_time" content="2020-05-10T13:17:52.624Z">
+<meta property="article:author" content="damon chan">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Damon&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Damon&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jenkins-gitlab" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/10/jenkins-gitlab/" class="article-date">
+  <time datetime="2020-05-10T11:01:43.000Z" itemprop="datePublished">2020-05-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      jenkins&amp;gitlab
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Jenkins-Gitlab-自动化工程"><a href="#Jenkins-Gitlab-自动化工程" class="headerlink" title="Jenkins + Gitlab 自动化工程"></a>Jenkins + Gitlab 自动化工程</h1><ol>
+<li><p>创建<code>Gitlab</code>项目</p>
+</li>
+<li><p>进入<code>Jenkins</code>,进入<code>凭据</code>,创建<code>全局凭据</code></p>
+</li>
+<li><p><code>类型</code> 选择 <code>SSH UserName with private key</code></p>
+</li>
+<li><p>输入<code>UserName</code>和<code>Private Key</code></p>
+<p><em>注意：</em></p>
+<ul>
+<li><code>Private Key</code>为秘钥对中的<code>私钥</code></li>
+<li>生成秘钥对<code>ssh-keygen -t rsa -b 4096 -C &quot;&lt;备注&gt;&quot;</code></li>
+</ul>
+</li>
+<li><p>在Gitlab中添加<code>公钥</code></p>
+<ul>
+<li>在项目中添加<ul>
+<li>进入<code>项目 &gt; 设置 &gt; CI / CD &gt; Deploy Keys</code></li>
+<li>录入<code>名称</code>和<code>公钥</code></li>
+</ul>
+</li>
+<li>在管理中心中添加<ul>
+<li>进入<code>管理中心 &gt; 部署密钥</code></li>
+<li>点击<code>新建部署密钥</code></li>
+<li>录入<code>名称</code>和<code>公钥</code></li>
+<li>进入<code>项目 &gt; 设置 &gt; CI / CD &gt; Deploy Keys &gt; 公开访问的部署密钥</code></li>
+<li>把刚添加的<code>密钥</code>点击启用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>复制<code>GitLab</code>项目地址</p>
+</li>
+<li><p>进入<code>Jenkins</code>，新建任务</p>
+</li>
+<li><p>在<code>源码管理中</code>选择<code>Git</code></p>
+</li>
+<li><p><code>Repository URL</code>中，录入<code>GitLab</code>项目地址</p>
+</li>
+<li><p><code>Credentials</code>中，选择刚录入的<code>全局凭据</code></p>
+</li>
+<li><p>配置<code>构建触发器</code></p>
+<ul>
+<li>选择<code>Build when a change is pushed to GitLab.</code></li>
+<li>点击<code>高级</code>，拉到<code>Secret token</code>,点击<code>Generate</code></li>
+</ul>
+<p><em>注意：</em></p>
+<ol>
+<li>在<code>Build when a change is pushed to GitLab.</code>后方，会生成一个<code>Webhook地址</code></li>
+</ol>
+</li>
+<li><p>进入<code>GitLab</code>项目中，在<code>设置 &gt; Webhooks</code>里面，添加<code>Webhook</code></p>
+<ul>
+<li>在<code>URL</code>中，录入在<code>Jenkins</code>中获取的<code>Webhook地址</code></li>
+<li>在<code>Secret Token</code>中，录入在<code>Jenkins</code>中获取的<code>Secret Token</code></li>
+<li>在<code>Trigger</code>中，勾选<code>Push events</code></li>
+<li>取消勾选<code>Enable SSL verification</code> </li>
+</ul>
+</li>
+<li><p>进入<code>Jenkins</code>任务中，在<code>构建</code>中，选择<code>执行shell</code>，并录入命令<code>echo &#39;hello world&#39;</code></p>
+</li>
+<li><p><code>GitLab</code>项目进行一次提交，这时，能看到<code>Jenkins</code>中，自动执行了一次构建，并输出了<code>hello world</code></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/10/jenkins-gitlab/" data-id="cka13mphe0005v7ag8gmhgzab" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/09/Jenkins/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Jenkins</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/05/10/jenkins-gitlab/">jenkins&amp;gitlab</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/09/Jenkins/">Jenkins</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/08/ESLint/">ESLint</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/07/hexo-install/">hexo 配置</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/07/git-lab/">git-lab安装</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 damon chan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ESLint | Damon&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ESLint 使用注意：Node.js version ^6.14  npm version ^3 1. 安装ESLint 安装 ESLint 1npm i -D eslint  生成配置文件 1.&#x2F;node_modules&#x2F;.bin&#x2F;eslint --init # 或者 npx eslint init  运行 ESLint 1.&#x2F;node_modules&#x2F;.bin&#x2F;eslint yourfile">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ESLint">
+<meta property="og:url" content="http://yoursite.com/2020/05/08/ESLint/index.html">
+<meta property="og:site_name" content="Damon&#39;s Blog">
+<meta property="og:description" content="ESLint 使用注意：Node.js version ^6.14  npm version ^3 1. 安装ESLint 安装 ESLint 1npm i -D eslint  生成配置文件 1.&#x2F;node_modules&#x2F;.bin&#x2F;eslint --init # 或者 npx eslint init  运行 ESLint 1.&#x2F;node_modules&#x2F;.bin&#x2F;eslint yourfile">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-08T06:37:43.000Z">
+<meta property="article:modified_time" content="2020-05-10T11:00:53.067Z">
+<meta property="article:author" content="damon chan">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Damon&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Damon&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ESLint" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/08/ESLint/" class="article-date">
+  <time datetime="2020-05-08T06:37:43.000Z" itemprop="datePublished">2020-05-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ESLint
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ESLint-使用"><a href="#ESLint-使用" class="headerlink" title="ESLint 使用"></a>ESLint 使用</h1><p><code>注意：Node.js version ^6.14  npm version ^3</code></p>
+<h2 id="1-安装ESLint"><a href="#1-安装ESLint" class="headerlink" title="1. 安装ESLint"></a>1. 安装ESLint</h2><ol>
+<li><p>安装 ESLint</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D eslint</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./node_modules/.bin/eslint --init <span class="comment"># 或者 npx eslint init</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行 ESLint</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./node_modules/.bin/eslint yourfile.js <span class="comment"># 或者 npx eslint yourfile.js</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="2-ESLint-规则和配置"><a href="#2-ESLint-规则和配置" class="headerlink" title="2. ESLint 规则和配置"></a>2. ESLint 规则和配置</h2><ol>
+<li><p>rules 配置</p>
+<p><code>rules是配置ESLint的验证规则</code></p>
+<ul>
+<li>以字符串数组的形式，配置各种规则<ul>
+<li>下标为 <code>0</code> 的字符串，配置当前规则是否启用</li>
+<li>下标为 <code>1</code> 的字符串，配置当前规则的逻辑</li>
+</ul>
+</li>
+<li>每个规则，必须配置为下列三个选项中的一个<ul>
+<li><code>off</code>或<code>0</code> - 关闭规则</li>
+<li><code>warn</code> 或 <code>1</code> - 开启规则，使用警告级别的错误（<code>不会导致程序退出</code>）</li>
+<li><code>error</code> 或 <code>2</code> - 开启规则，使用错误级别的错误（<code>当被触发时，程序会退出</code>）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>extends </p>
+<p><code>一个配置文件可以被基础配置中的已启用的规则继承。</code></p>
+<ul>
+<li><p>例如 <code>如果要使用 vue 的默认规则</code></p>
+<ul>
+<li><p>首先，安装 vue 规则的 ESLint 插件</p>
+<p>使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue add @vue/cli-plugin-eslint</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D eslint eslint-plugin-vue</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后，在配置文件里面，引用插件</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">extends:[</span><br><span class="line">  'plugin:vue/recommended'</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/08/ESLint/" data-id="cka13mph40000v7ag5mtt7yfe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/09/Jenkins/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Jenkins
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/07/hexo-install/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hexo 配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/05/10/jenkins-gitlab/">jenkins&amp;gitlab</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/09/Jenkins/">Jenkins</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/08/ESLint/">ESLint</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/07/hexo-install/">hexo 配置</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/07/git-lab/">git-lab安装</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 damon chan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
