@@ -64,6 +64,382 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-redis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/14/redis/" class="article-date">
+  <time datetime="2020-05-14T06:29:37.000Z" itemprop="datePublished">2020-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/14/redis/">Redis</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="一-安装"><a href="#一-安装" class="headerlink" title="一. 安装"></a>一. 安装</h2><ul>
+<li><p>创建<code>docker-compose.yml</code>文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">'redis'</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">'redis'</span><span class="string">,</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="number">25001</span><span class="string">:6379</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/home/docker/redis:/data</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">["redis-server",</span> <span class="string">"--requirepass"</span><span class="string">,</span> <span class="string">"123456"</span><span class="string">]</span> <span class="comment"># 123456为设置的默认密码</span></span><br><span class="line">  </span><br><span class="line"> <span class="comment"># docker run -itd --restart=always --name redis -p 25001:6379 -v /home/docker/redis:/data redis redis-server --requirepass 123456</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 <code>docker-compose up -d</code>运行</p>
+</li>
+</ul>
+<h2 id="二-常见命令"><a href="#二-常见命令" class="headerlink" title="二. 常见命令"></a>二. 常见命令</h2><p><a href="http://doc.redisfans.com/" target="_blank" rel="noopener">Redis 命令参考</a></p>
+<h3 id="在容器内运行redis-cli"><a href="#在容器内运行redis-cli" class="headerlink" title="在容器内运行redis-cli"></a>在容器内运行<code>redis-cli</code></h3><ol>
+<li><p>在宿主机中运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it &lt;容器ID/容器名称&gt; redis-cli</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在容器内部运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器内部</span></span><br><span class="line">docker <span class="built_in">exec</span> -it &lt;容器ID/容器名称&gt; /bin/bash</span><br><span class="line"><span class="comment"># 运行 redis-cli</span></span><br><span class="line">redis-cli</span><br><span class="line"><span class="comment"># 登录</span></span><br><span class="line">auth &lt;密码&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/14/redis/" data-id="ckdolaezo0003q9ag045l0l6s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-MongoDB-config" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/13/MongoDB-config/" class="article-date">
+  <time datetime="2020-05-13T06:34:10.000Z" itemprop="datePublished">2020-05-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/13/MongoDB-config/">MongoDB-config</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MongoDB-初始化配置及基础操作"><a href="#MongoDB-初始化配置及基础操作" class="headerlink" title="MongoDB 初始化配置及基础操作"></a>MongoDB 初始化配置及基础操作</h1><p>==首先先要连接到MongoDB==</p>
+<ul>
+<li><p>连接数据库</p>
+<ol>
+<li><p>使用<code>mongo</code>连接</p>
+</li>
+<li><p>如果是<code>docker</code>启动的<code>MongoDB</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it &lt;MongoDB容器名称&gt; mongo</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><p>登录帐号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br><span class="line">db.auth(<span class="string">'root'</span>,<span class="string">'example'</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="一-初始化配置"><a href="#一-初始化配置" class="headerlink" title="一. 初始化配置"></a>一. 初始化配置</h2><ol>
+<li><p>新增用户</p>
+<p><a href="https://docs.mongodb.com/manual/tutorial/create-users/" target="_blank" rel="noopener">官方文档</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">use reporting</span><br><span class="line">db.createUser(</span><br><span class="line">  &#123;</span><br><span class="line">    user: <span class="string">"reportsUser"</span>,</span><br><span class="line">    <span class="built_in">pwd</span>: passwordPrompt(),  // or cleartext password</span><br><span class="line">    roles: [</span><br><span class="line">       &#123; role: <span class="string">"read"</span>, db: <span class="string">"reporting"</span> &#125;,</span><br><span class="line">       &#123; role: <span class="string">"read"</span>, db: <span class="string">"products"</span> &#125;,</span><br><span class="line">       &#123; role: <span class="string">"read"</span>, db: <span class="string">"sales"</span> &#125;,</span><br><span class="line">       &#123; role: <span class="string">"readWrite"</span>, db: <span class="string">"accounts"</span> &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>管理用户权限</p>
+<p><a href="https://docs.mongodb.com/manual/reference/built-in-roles/" target="_blank" rel="noopener">官方文档</a></p>
+</li>
+</ol>
+<h2 id="二-操作"><a href="#二-操作" class="headerlink" title="二. 操作"></a>二. 操作</h2><h3 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1. 创建数据库"></a>1. 创建数据库</h3><p><code>use &lt;数据库名称&gt;</code></p>
+<h3 id="2-创建用户"><a href="#2-创建用户" class="headerlink" title="2. 创建用户"></a>2. 创建用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123;</span><br><span class="line">	user:<span class="string">'username'</span>,</span><br><span class="line">	<span class="built_in">pwd</span>:<span class="string">'password'</span>,</span><br><span class="line">	roles:[</span><br><span class="line">		&#123;</span><br><span class="line">			role:<span class="string">'dbOwner'</span>,</span><br><span class="line">			db:<span class="string">'dbname'</span></span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-登录"><a href="#3-登录" class="headerlink" title="3. 登录"></a>3. 登录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#连接数据库</span></span><br><span class="line">use &lt;数据库名称&gt;</span><br><span class="line"><span class="comment">#登录</span></span><br><span class="line">db.auth(<span class="string">'username'</span>,<span class="string">'password'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-插入数据"><a href="#4-插入数据" class="headerlink" title="4. 插入数据"></a>4. 插入数据</h3><ul>
+<li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/#db.collection.insertOne" target="_blank" rel="noopener"><code>db.collection.insertOne()</code></a></li>
+<li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.insertMany/#db.collection.insertMany" target="_blank" rel="noopener"><code>db.collection.insertMany()</code></a></li>
+</ul>
+<img src="/2020/05/13/MongoDB-config/image-20200513145649287.png" class="">
+
+<p>== 关系型数据库中的数据表，在<code>MongoDB</code>中称为<code>collection</code> ==</p>
+<h3 id="5-查询数据"><a href="#5-查询数据" class="headerlink" title="5. 查询数据"></a>5. 查询数据</h3><p><a href="https://docs.mongodb.com/manual/reference/method/db.collection.find/#db.collection.find" target="_blank" rel="noopener"><code>db.collection.find()</code></a></p>
+<img src="/2020/05/13/MongoDB-config/image-20200513150249735.png" class="" title="%｝ ### 6. 更新数据 * [&#96;db.collection.updateOne()&#96;](https:&#x2F;&#x2F;docs.mongodb.com&#x2F;manual&#x2F;reference&#x2F;method&#x2F;db.collection.updateOne&#x2F;#db.collection.updateOne) * [&#96;db.collection.updateMany()&#96;](https:&#x2F;&#x2F;docs.mongodb.com&#x2F;manual&#x2F;reference&#x2F;method&#x2F;db.collection.updateMany&#x2F;#db.collection.updateMany) * [&#96;db.collection.replaceOne()&#96;](https:&#x2F;&#x2F;docs.mongodb.com&#x2F;manual&#x2F;reference&#x2F;method&#x2F;db.collection.replaceOne&#x2F;#db.collection.replaceOne) {% asset_img image-20200513150557524.png">
+
+<h3 id="7-删除数据"><a href="#7-删除数据" class="headerlink" title="7. 删除数据"></a>7. 删除数据</h3><ul>
+<li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.deleteOne/#db.collection.deleteOne" target="_blank" rel="noopener"><code>db.collection.deleteOne()</code></a></li>
+<li><a href="https://docs.mongodb.com/manual/reference/method/db.collection.deleteMany/#db.collection.deleteMany" target="_blank" rel="noopener"><code>db.collection.deleteMany()</code></a></li>
+</ul>
+<img src="/2020/05/13/MongoDB-config/image-20200513150653910.png" class="">
+
+<h2 id="三-备份"><a href="#三-备份" class="headerlink" title="三. 备份"></a>三. 备份</h2> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ① 在容器内部生成备份</span></span><br><span class="line">docker <span class="built_in">exec</span> -it &lt;mongodb容器名称&gt; mongodump -h localhost -u &lt;管理员帐号&gt; -p &lt;管理员密码&gt; -o &lt;备份保存的路径&gt;</span><br><span class="line"><span class="comment"># ② 将容器内部的备份，拷贝到宿主机</span></span><br><span class="line">docker cp &lt;容器ID&gt;:&lt;备份保存的路径&gt; &lt;宿主机存放备份地址&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="四-还原"><a href="#四-还原" class="headerlink" title="四. 还原"></a>四. 还原</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it &lt;mongodb容器名称&gt; mongorestore -h localhost -u &lt;管理员帐号&gt; -p &lt;管理员密码&gt; --dir &lt;存放备份的路径&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/13/MongoDB-config/" data-id="ckdolaezn0001q9aganxdfxib" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-MongoDB" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/13/MongoDB/" class="article-date">
+  <time datetime="2020-05-13T03:22:27.000Z" itemprop="datePublished">2020-05-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/13/MongoDB/">MongoDB</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MongoDB-安装"><a href="#MongoDB-安装" class="headerlink" title="MongoDB 安装"></a>MongoDB 安装</h1><h2 id="一-MacOS"><a href="#一-MacOS" class="headerlink" title="一. MacOS"></a>一. MacOS</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><ol>
+<li><pre><code class="bash">brew tap mongodb/brew
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. &#96;&#96;&#96;bash</span><br><span class="line">   brew install mongodb-community@4.2</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+<h3 id="2-运行"><a href="#2-运行" class="headerlink" title="2. 运行"></a>2. 运行</h3><ol>
+<li><p>使用<code>mongod</code>运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --config /usr/<span class="built_in">local</span>/etc/mongod.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>brew services</code>运行</p>
+<p>==这种方式，会随系统，自动启动==</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services start mongodb-community@4.2</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="3-连接数据库"><a href="#3-连接数据库" class="headerlink" title="3. 连接数据库"></a>3. 连接数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-Docker"><a href="#二-Docker" class="headerlink" title="二. Docker"></a>二. Docker</h2><ol>
+<li><p>生成docker-compose文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.1'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mongo:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mongo</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_ROOT_USERNAME:</span> <span class="string">root</span> <span class="comment"># 初始化默认管理员帐号</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_ROOT_PASSWORD:</span> <span class="string">example</span> <span class="comment"># 初始化默认管理员密码</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">27017</span><span class="string">:27017</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/home/docker/mongo:/data/db</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行docker</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/13/MongoDB/" data-id="ckdolaezo0002q9agcyr0hh56" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Dockerfill-Gitlab-Jenkins" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/12/Dockerfill-Gitlab-Jenkins/" class="article-date">
+  <time datetime="2020-05-12T06:40:31.000Z" itemprop="datePublished">2020-05-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/12/Dockerfill-Gitlab-Jenkins/">Dockerfill-Gitlab-Jenkins</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用Docker-GitLab-Jenkins自动化构建并发布项目"><a href="#使用Docker-GitLab-Jenkins自动化构建并发布项目" class="headerlink" title="使用Docker+GitLab+Jenkins自动化构建并发布项目"></a>使用Docker+GitLab+Jenkins自动化构建并发布项目</h1><ol>
+<li><p>创建 Gitlab + Jenkins自动化工程</p>
+<p>参考：<a href="https://dragon0072.github.io/2020/05/10/jenkins-gitlab/" target="_blank" rel="noopener">Jenkins + Gitlab 自动化工程</a></p>
+</li>
+<li><p>在Gitlab项目中新建<code>Dockerfile</code>文件</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># build stage</span></span><br><span class="line"><span class="keyword">FROM</span> node:<span class="number">10</span> as build-stage</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置是谁在维护这个项目</span></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> maintainer=dragon0072@outlook.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /app</span></span><br><span class="line"><span class="comment"># 把当前文件目录中的文件，copy到镜像中</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> . .</span></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yarn install --registry=https://registry.npm.taobao.org</span></span><br><span class="line"><span class="comment"># 编译项目</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> npm run build</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># production stage</span></span><br><span class="line"><span class="keyword">FROM</span> nginx:stable-alpine as production-stage</span><br><span class="line"><span class="comment"># 将生成的项目文件，拷贝到nginx目录中</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> --from=build-stage /app/dist /usr/share/nginx/html</span></span><br><span class="line"><span class="comment"># 暴露一个端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"><span class="comment"># 运行nginx</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"nginx"</span>, <span class="string">"-g"</span>, <span class="string">"daemon off;"</span>]</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>添加<code>.dockerignore</code>文件，将不必要文件，排除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"># Dependency directory</span><br><span class="line"># https:&#x2F;&#x2F;www.npmjs.org&#x2F;doc&#x2F;misc&#x2F;npm-faq.html#should-i-check-my-node_modules-folder-into-git</span><br><span class="line">node_modules</span><br><span class="line">.DS_Store</span><br><span class="line">dist</span><br><span class="line"></span><br><span class="line"># node-waf configuration</span><br><span class="line">.lock-wscript</span><br><span class="line"></span><br><span class="line"># Compiled binary addons (http:&#x2F;&#x2F;nodejs.org&#x2F;api&#x2F;addons.html)</span><br><span class="line">build&#x2F;Release</span><br><span class="line">.dockerignore</span><br><span class="line">Dockerfile</span><br><span class="line">*docker-compose*</span><br><span class="line"></span><br><span class="line"># Logs</span><br><span class="line">logs</span><br><span class="line">*.log</span><br><span class="line"></span><br><span class="line"># Runtime data</span><br><span class="line">.idea</span><br><span class="line">.vscode</span><br><span class="line">*.suo</span><br><span class="line">*.ntvs*</span><br><span class="line">*.njsproj</span><br><span class="line">*.sln</span><br><span class="line">*.sw*</span><br><span class="line">pids</span><br><span class="line">*.pid</span><br><span class="line">*.seed</span><br><span class="line">.git</span><br><span class="line">.hg</span><br><span class="line">.svn</span><br></pre></td></tr></table></figure>
+
+<p><em>注意</em></p>
+<ul>
+<li><p>如果需要本地化测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先，打包成镜像</span></span><br><span class="line">docker build -t &lt;自定义镜像名称&gt; .</span><br><span class="line"><span class="comment"># 然后，运行这个镜像</span></span><br><span class="line">docker run -itd --name &lt;自定义容器名称&gt; -p 10000:80</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>配置<code>Jenkins</code>自动化脚本</p>
+<ul>
+<li><p>进入<code>Jenkins</code>任务</p>
+</li>
+<li><p>进入配置页面</p>
+</li>
+<li><p>来到<code>构建选项卡</code>，选择<code>执行shell</code>，并录入脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 指定当前为shell脚本</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 自定义两个参数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="variable">$&#123;container_name&#125;</span> 在jenkins任务中配置</span></span><br><span class="line">CONTAINER=$&#123;container_name&#125;</span><br><span class="line">PORT=$&#123;port&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 完成镜像的构建</span></span><br><span class="line">docker build --no-cache -t $&#123;image_name&#125;:$&#123;tag&#125; .</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进行资源处理，判断是否有同名容器，正在运行</span></span><br><span class="line">RUNNING=$(docker inspect --format="&#123;&#123; .State.Running &#125;&#125;" $CONTAINER)</span><br><span class="line"></span><br><span class="line">if [ ! -n $RUNNING ]; then</span><br><span class="line">	echo "$CONTAINER does not exit"</span><br><span class="line">    return 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ "$RUNNING" == "false" ]; then</span><br><span class="line">	echo "$CONTAINER is not running."</span><br><span class="line">    return 2</span><br><span class="line">else</span><br><span class="line">	echo "$CONTAINER is running"</span><br><span class="line">    #delete same name container</span><br><span class="line">    matchingStarted=$(docker ps --filter="name=$CONTAINER" -q | xargs)</span><br><span class="line">    if [ -n $matchingStarted ]; then</span><br><span class="line">    	docker stop $matchingStarted</span><br><span class="line">    fi</span><br><span class="line">    </span><br><span class="line">    matching=$(docker ps -a --filter="name=$CONTAINER" -q | xargs)</span><br><span class="line">    if [ -n $matching ]; then</span><br><span class="line">    	docker rm $matching</span><br><span class="line">    fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo "RUNNING IS $&#123;RUNNING&#125;"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 运行镜像</span></span><br><span class="line">docker run -itd --name $CONTAINER -p $PORT:10083 $&#123;image_name&#125;:$&#123;tag&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em>注意</em><ol>
+<li><code>${container_name}</code>,<code>${port}</code>,<code>${image_name}</code>,<code>${tag}</code>在<code>Jenkins</code>任务配置中，进行配置</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>来到<code>General</code>选项卡</p>
+<ul>
+<li>勾选<code>参数化构建过程</code></li>
+<li>选择<code>添加参数 &gt; 字符参数</code></li>
+<li>根据<code>shell脚本</code>中使用到的参数，进行配置</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li>来到<code>Gitlab</code>项目，进行一次提交，此时，项目会自动发布到服务器</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/12/Dockerfill-Gitlab-Jenkins/" data-id="ckdolaezj0000q9ag8rhwaz3o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ssh-login" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/12/ssh-login/" class="article-date">
+  <time datetime="2020-05-12T03:36:31.000Z" itemprop="datePublished">2020-05-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/12/ssh-login/">ssh-login</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用-ssh-key-远程登录-Linux服务器"><a href="#使用-ssh-key-远程登录-Linux服务器" class="headerlink" title="使用 ssh key 远程登录 Linux服务器"></a>使用 ssh key 远程登录 Linux服务器</h1><h2 id="修改-Linux-服务器，远程连接端口"><a href="#修改-Linux-服务器，远程连接端口" class="headerlink" title="修改 Linux 服务器，远程连接端口"></a>修改 Linux 服务器，远程连接端口</h2><p><code>Linux服务器，默认远程连接端口为22</code></p>
+<ol>
+<li><p>查看当前<code>ssh</code>服务，运行状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd status <span class="comment">#systemctl status sshd.service</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改端口</p>
+<ul>
+<li><p>打开文件</p>
+<p><code>vi /etc/ssh/sshd_config</code></p>
+</li>
+<li><p>找到 <code># Port 22</code></p>
+</li>
+<li><p>删除<code>#</code>号，并修改端口号，为你想要的</p>
+</li>
+</ul>
+</li>
+<li><p>重启服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">semanage port -a -t ssh_port_t -p tcp &lt;PORTNUMBER&gt; <span class="comment">#如果是ubuntu操作系统，则不需要执行</span></span><br><span class="line"><span class="comment"># 如果提示 semanage: command not found</span></span><br><span class="line"><span class="comment"># 则执行 yum whatprovides semanage 反查 semanage 是在哪个包中</span></span><br><span class="line"><span class="comment"># 然后运行 yum install -y &lt;查到的包&gt; 安装这个包</span></span><br><span class="line"><span class="comment"># 最后 再重新执行 semanage port -a -t ssh_port_t -p tcp &lt;PORTNUMBER&gt;</span></span><br><span class="line"><span class="comment">#-------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># 确认端口是否添加到 semanage中</span></span><br><span class="line">semanage port -l |grep ssh</span><br><span class="line"><span class="comment"># 重启 ssh</span></span><br><span class="line">service sshd restart <span class="comment">#systemctl restart sshd.service</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="配置-ssh-key-登录-Linux-服务器"><a href="#配置-ssh-key-登录-Linux-服务器" class="headerlink" title="配置 ssh key 登录 Linux 服务器"></a>配置 ssh key 登录 Linux 服务器</h2><ol>
+<li><p>在本地生成 <code>ssh key</code></p>
+<p><code>ssh-keygen -t rsa -b 4096 -C &quot;&lt;备注&gt;&quot;</code></p>
+</li>
+<li><p>修改本地配置文件</p>
+<p><code>vi ~/.ssh/config</code></p>
+</li>
+<li><p>添加如下信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host &lt;名称&gt;</span><br><span class="line">  Port &lt;端口号&gt;</span><br><span class="line">  HostName &lt;服务器IP&gt;</span><br><span class="line">  User &lt;登录用户名&gt;</span><br><span class="line">  IdentityFile &lt;生成的ssh key中，私钥的路径&gt;</span><br><span class="line">  IdentitiesOnly yes</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把<code>ssh key</code>中的公钥，录入到服务器的配置文件中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.ssh/ <span class="comment">#如果没有这个文件夹，使用 mkdir -p ~/.ssh 创建这个文件夹</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#编辑配置文件</span></span><br><span class="line">vi authorized_keys</span><br><span class="line"></span><br><span class="line"><span class="comment">#将公钥录入到文件中，并保存</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="5">
+<li><p>使用<code>ssh key</code>,远程连接<code>Linux服务器</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh &lt;名称&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/12/ssh-login/" data-id="ckdolaezp0004q9agegbbfco4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-jenkins-gitlab" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/05/10/jenkins-gitlab/" class="article-date">
@@ -200,7 +576,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name jenkins -itd -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用<code>docker-compose</code>安装</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">jenkins:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">'jenkins'</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jenkins/jenkins:lts</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">jenkins:994</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"8080:8080"</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"50000:50000"</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"10051:10051"</span></span><br><span class="line">    <span class="attr">volumes:</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">/home/jenkins/data:/var/jenkins_home</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/usr/bin/docker:/usr/bin/docker</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">jenkins:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">'jenkins'</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jenkins/jenkins:lts</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">jenkins:994</span> <span class="comment"># 这里的 jenkins 要对应当前系统登录用户</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"8080:8080"</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"50000:50000"</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"10051:10051"</span></span><br><span class="line">    <span class="attr">volumes:</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">/home/jenkins/data:/var/jenkins_home</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/usr/bin/docker:/usr/bin/docker</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock</span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
@@ -539,81 +915,12 @@
 
 
   
-    <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/05/07/git/" class="article-date">
-  <time datetime="2020-05-07T03:07:27.000Z" itemprop="datePublished">2020-05-07</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/07/git/">Git 学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git-学习"><a href="#Git-学习" class="headerlink" title="Git 学习"></a>Git 学习</h1><h2 id="Git-基础"><a href="#Git-基础" class="headerlink" title="Git 基础"></a>Git 基础</h2><img src="/2020/05/07/git/image-20200507110958159.png" class="">
-
-
-
-<h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> <span class="comment">#查看提交日志</span></span><br><span class="line"></span><br><span class="line">git reflog <span class="comment">#查看本地日志</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="配置-Git"><a href="#配置-Git" class="headerlink" title="配置 Git"></a>配置 Git</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git config --global --list <span class="comment">#查看全局git配置</span></span><br><span class="line"></span><br><span class="line">git config --global user.name <span class="string">"&lt;名字&gt;"</span> <span class="comment">#配置上传时的名称</span></span><br><span class="line"></span><br><span class="line">git config --global user.email <span class="string">"&lt;邮箱&gt;"</span> <span class="comment">#配置上传时，使用的邮箱</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Git-拉取修改"><a href="#Git-拉取修改" class="headerlink" title="Git 拉取修改"></a>Git 拉取修改</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master <span class="comment">#从远程仓库拉取修改，并覆盖本地</span></span><br><span class="line"></span><br><span class="line">git fetch <span class="comment">#从远程仓库拉取修改，并不覆盖本地</span></span><br><span class="line">git merge FECH_HEAD <span class="comment">#将从远程仓库拉取的修改，合并到当前分支</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Git-提交修改"><a href="#Git-提交修改" class="headerlink" title="Git 提交修改"></a>Git 提交修改</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git add . <span class="comment">#需要暂存的文件</span></span><br><span class="line"></span><br><span class="line">git commit -m <span class="string">"&lt;备注&gt;"</span> <span class="comment">#将暂存的文件提交，并添加备注</span></span><br><span class="line"></span><br><span class="line">git push origin master <span class="comment">#将提交的文件，推送到 服务 origin 的 master分支上</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="回退提交"><a href="#回退提交" class="headerlink" title="回退提交"></a>回退提交</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard head^ <span class="comment">#回退到上一次提交</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="缓存-Git"><a href="#缓存-Git" class="headerlink" title="缓存 Git"></a>缓存 Git</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git stash <span class="comment">#将当前修改文件，缓存下来。并回退到干净的工作区</span></span><br><span class="line"></span><br><span class="line">git stash apply <span class="comment">#将缓存中的文件，放回工作区</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="查看当前修改"><a href="#查看当前修改" class="headerlink" title="查看当前修改"></a>查看当前修改</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure>
-
-<h2 id="丢弃工作区的改动"><a href="#丢弃工作区的改动" class="headerlink" title="丢弃工作区的改动"></a>丢弃工作区的改动</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="删除本地缓存的快照"><a href="#删除本地缓存的快照" class="headerlink" title="删除本地缓存的快照"></a>删除本地缓存的快照</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached -r .</span><br></pre></td></tr></table></figure>
-
-<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><ol>
-<li><p>查看分支</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建分支</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git branch &lt;分支名称&gt; <span class="comment">#仅创建分支，不切换到新创建的分支上</span></span><br><span class="line"></span><br><span class="line">git checkout -b &lt;分支名称&gt; <span class="comment">#创建并切换到 &lt;分支名称&gt; 分支</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除分支</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -D &lt;分支名称&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>切换分支 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;分支名称&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>合并分支</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge &lt;分支名称&gt; <span class="comment">#可与git fetch配合使用</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/07/git/" data-id="cka142xxv00037jag9piw19ea" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
+  </nav>
 
 </section>
         
@@ -644,23 +951,23 @@
       <ul>
         
           <li>
-            <a href="/2020/05/10/jenkins-gitlab/">jenkins&amp;gitlab</a>
+            <a href="/2020/05/14/redis/">Redis</a>
           </li>
         
           <li>
-            <a href="/2020/05/09/Jenkins/">Jenkins</a>
+            <a href="/2020/05/13/MongoDB-config/">MongoDB-config</a>
           </li>
         
           <li>
-            <a href="/2020/05/08/ESLint/">ESLint</a>
+            <a href="/2020/05/13/MongoDB/">MongoDB</a>
           </li>
         
           <li>
-            <a href="/2020/05/07/hexo-install/">hexo 配置</a>
+            <a href="/2020/05/12/Dockerfill-Gitlab-Jenkins/">Dockerfill-Gitlab-Jenkins</a>
           </li>
         
           <li>
-            <a href="/2020/05/07/git-lab/">git-lab安装</a>
+            <a href="/2020/05/12/ssh-login/">ssh-login</a>
           </li>
         
       </ul>
@@ -676,7 +983,10 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2020 damon chan<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      <div style="width:300px;margin:0 auto; padding:20px 0;">
+        <img src="../../source/css/images/beian.png" alt="">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44040302000338" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤公网安备 44040302000338号</p></a>
+      </div> 
     </div>
   </div>
 </footer>
