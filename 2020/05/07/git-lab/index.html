@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>git-lab安装 | Damon&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用docker 安装git-lab快捷安装123456789sudo docker run --detach \ # 后台运行  --hostname gitlab.example.com \ # 指定域名  --publish 443:443 --publish 80:80 --publish 22:22 \ # 开放端口： 443（https端口） 80（默认服务访问端口） 22（克隆仓库端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git-lab安装">
+<meta property="og:url" content="http://yoursite.com/2020/05/07/git-lab/index.html">
+<meta property="og:site_name" content="Damon&#39;s Blog">
+<meta property="og:description" content="使用docker 安装git-lab快捷安装123456789sudo docker run --detach \ # 后台运行  --hostname gitlab.example.com \ # 指定域名  --publish 443:443 --publish 80:80 --publish 22:22 \ # 开放端口： 443（https端口） 80（默认服务访问端口） 22（克隆仓库端">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-07T08:06:19.000Z">
+<meta property="article:modified_time" content="2020-05-07T14:45:50.909Z">
+<meta property="article:author" content="damon chan">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Damon&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Damon&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-git-lab" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/07/git-lab/" class="article-date">
+  <time datetime="2020-05-07T08:06:19.000Z" itemprop="datePublished">2020-05-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git-lab安装
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="使用docker-安装git-lab"><a href="#使用docker-安装git-lab" class="headerlink" title="使用docker 安装git-lab"></a>使用docker 安装git-lab</h1><h2 id="快捷安装"><a href="#快捷安装" class="headerlink" title="快捷安装"></a>快捷安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run --detach \ <span class="comment"># 后台运行</span></span><br><span class="line">  --hostname gitlab.example.com \ <span class="comment"># 指定域名</span></span><br><span class="line">  --publish 443:443 --publish 80:80 --publish 22:22 \ <span class="comment"># 开放端口： 443（https端口） 80（默认服务访问端口） 22（克隆仓库端口）</span></span><br><span class="line">  --name gitlab \ <span class="comment"># 镜像名称</span></span><br><span class="line">  --restart always \ <span class="comment">#是否自动重启</span></span><br><span class="line">  --volume <span class="variable">$GITLAB_HOME</span>/gitlab/config:/etc/gitlab \</span><br><span class="line">  --volume <span class="variable">$GITLAB_HOME</span>/gitlab/logs:/var/<span class="built_in">log</span>/gitlab \</span><br><span class="line">  --volume <span class="variable">$GITLAB_HOME</span>/gitlab/data:/var/opt/gitlab \ <span class="comment"># gitlab数据，映射到宿主机</span></span><br><span class="line">  gitlab/gitlab-ce:latest</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用-docker-compose-安装"><a href="#使用-docker-compose-安装" class="headerlink" title="使用 docker-compose 安装"></a>使用 docker-compose 安装</h2><ol>
+<li><p>使用官方文档中的方式</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">web:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">'gitlab/gitlab-ce:latest'</span></span><br><span class="line">  <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">  <span class="attr">hostname:</span> <span class="string">'gitlab.example.com'</span></span><br><span class="line">  <span class="attr">environment:</span></span><br><span class="line">    <span class="attr">GITLAB_OMNIBUS_CONFIG:</span> <span class="string">|</span></span><br><span class="line">      <span class="string">external_url</span> <span class="string">'https://gitlab.example.com'</span></span><br><span class="line">      <span class="comment"># Add any other gitlab.rb configuration here, each on its own line</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">'80:80'</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">'443:443'</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">'22:22'</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">'$GITLAB_HOME/gitlab/config:/etc/gitlab'</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">'$GITLAB_HOME/gitlab/logs:/var/log/gitlab'</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">'$GITLAB_HOME/gitlab/data:/var/opt/gitlab'</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>使用 github 中的 <a href="https://github.com/sameersbn/docker-gitlab" target="_blank" rel="noopener">docker-gitlab</a> 项目进行创建</p>
+<ul>
+<li>首先，到docker-gitlab项目下，复制docker-compose.yml 文件中的内容</li>
+<li>然后，在文本编辑器中，根据文档提示，配置docker-compose.yml</li>
+<li>最后，将配置信息上传到服务器，并使用 <code>docker-compose up -d</code> 运行git-lab服务</li>
+<li>如果需要设置git-lab备份超时<ul>
+<li><code>在docker-compose.yml文件中，添加 - GITLAB_BACKUP_EXPIRY=604800 #这个参数，是以秒为单位。当前设置的604800，实际是表示7天。</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="服务成功启动，但访问网页，出现502报错"><a href="#服务成功启动，但访问网页，出现502报错" class="headerlink" title="服务成功启动，但访问网页，出现502报错"></a>服务成功启动，但访问网页，出现502报错</h2><p>那大概率为git-lab占用大量cpu，和内存。导致服务器崩溃。</p>
+<ol>
+<li><p>可尝试启用<code>swap</code>分区进行处理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.查看swap分区是否启动（无）</span></span><br><span class="line">cat /proc/swaps </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.创建</span></span><br><span class="line">dd <span class="keyword">if</span>=/dev/zero of=/data/swap bs=512 count=8388616 </span><br><span class="line"><span class="comment">#创建swap大小为bs*count=4294971392(4G)；</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.通过mkswap命令将上面新建出的文件做成swap分区</span></span><br><span class="line">mkswap /data/swap </span><br><span class="line"></span><br><span class="line"><span class="comment"># 4.查看内核参数vm.swappiness中的数值是否为0，如果为0则根据实际需要调整成60</span></span><br><span class="line">cat /proc/sys/vm/swappiness <span class="comment"># 查看</span></span><br><span class="line">sysctl -w vm.swappiness=60 <span class="comment"># 设置</span></span><br><span class="line"><span class="comment"># 若想永久修改，则编辑/etc/sysctl.conf文件，改文件中有vm.swappiness变量配置，默认为0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5.启用分区</span></span><br><span class="line">swapon /data/swap</span><br><span class="line"><span class="built_in">echo</span> “/data/swap swap swap defaults 0 0” &gt;&gt; /etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6.再次使用cat /proc/swaps 查看swap分区是否启动</span></span><br><span class="line"><span class="comment"># 重启gitlab。</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li>提升服务器配置，最少达到 <code>2核4G</code> </li>
+</ol>
+<p><code>经测试，1核2G的服务器。在启用swap后，等待一段时间，可以访问gitlab。</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/07/git-lab/" data-id="cktdpmtu200071hag3ow08plt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/07/hexo-install/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          hexo 配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/07/git/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Git 学习</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/05/14/redis/">Redis</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/13/MongoDB-config/">MongoDB-config</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/13/MongoDB/">MongoDB</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/12/Dockerfill-Gitlab-Jenkins/">Dockerfill-Gitlab-Jenkins</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/12/ssh-login/">ssh-login</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 damon chan<br>
+      
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

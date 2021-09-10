@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Jenkins | Damon&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Jenkins 使用一. 系统要求 最低要求 RAM &gt; 256M,DISK &gt; 1G  最小化团队 RAM &gt; 1G,DISK &gt; 50G+    二. 安装1. 安装Jenkins 快捷安装 1docker run --name jenkins -itd -p 8080:8080 -p 50000:50000 jenkins&#x2F;jenkins:lts  使用docker-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jenkins">
+<meta property="og:url" content="http://yoursite.com/2020/05/09/Jenkins/index.html">
+<meta property="og:site_name" content="Damon&#39;s Blog">
+<meta property="og:description" content="Jenkins 使用一. 系统要求 最低要求 RAM &gt; 256M,DISK &gt; 1G  最小化团队 RAM &gt; 1G,DISK &gt; 50G+    二. 安装1. 安装Jenkins 快捷安装 1docker run --name jenkins -itd -p 8080:8080 -p 50000:50000 jenkins&#x2F;jenkins:lts  使用docker-">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/05/09/Jenkins/image-20200509101645975.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/09/Jenkins/image-20200510214150990.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/09/Jenkins/image-20200510214548129.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/09/Jenkins/image-20200510214305886.png">
+<meta property="article:published_time" content="2020-05-09T01:39:21.000Z">
+<meta property="article:modified_time" content="2020-05-22T18:44:25.475Z">
+<meta property="article:author" content="damon chan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/09/Jenkins/image-20200509101645975.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Damon&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Damon&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Jenkins" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/09/Jenkins/" class="article-date">
+  <time datetime="2020-05-09T01:39:21.000Z" itemprop="datePublished">2020-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Jenkins
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Jenkins-使用"><a href="#Jenkins-使用" class="headerlink" title="Jenkins 使用"></a>Jenkins 使用</h1><h2 id="一-系统要求"><a href="#一-系统要求" class="headerlink" title="一. 系统要求"></a>一. 系统要求</h2><ol>
+<li><p>最低要求</p>
+<p><code>RAM &gt; 256M,DISK &gt; 1G</code></p>
+</li>
+<li><p>最小化团队</p>
+<p><code>RAM &gt; 1G,DISK &gt; 50G+</code></p>
+</li>
+</ol>
+<hr>
+<h2 id="二-安装"><a href="#二-安装" class="headerlink" title="二. 安装"></a>二. 安装</h2><h3 id="1-安装Jenkins"><a href="#1-安装Jenkins" class="headerlink" title="1. 安装Jenkins"></a>1. 安装Jenkins</h3><ol>
+<li><p>快捷安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name jenkins -itd -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>docker-compose</code>安装</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">jenkins:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">'jenkins'</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jenkins/jenkins:lts</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">user:</span> <span class="string">jenkins:994</span> <span class="comment"># 这里的 jenkins 要对应当前系统登录用户</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"8080:8080"</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"50000:50000"</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">"10051:10051"</span></span><br><span class="line">    <span class="attr">volumes:</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">/home/jenkins/data:/var/jenkins_home</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/usr/bin/docker:/usr/bin/docker</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p><strong>安装完成后，需要获取<code>jenkins管理员</code>的初始密码</strong></p>
+<ol>
+<li><p>使用 <code>docker logs -f jenkins</code> 打印日志</p>
+</li>
+<li><p>找到日志中输出的 <code>hash密码</code></p>
+<img src="/2020/05/09/Jenkins/image-20200509101645975.png" class="">
+
+</li>
+</ol>
+<h3 id="2-进入Jenkins界面"><a href="#2-进入Jenkins界面" class="headerlink" title="2. 进入Jenkins界面"></a>2. 进入Jenkins界面</h3><ol>
+<li>在文本框中，输入刚刚获取到的 管理员密码，解锁<code>Jenkins</code></li>
+<li>安装<code>Jenkins</code>插件<ul>
+<li>插件安装方式有两种：<ul>
+<li>离线</li>
+<li>在线</li>
+</ul>
+</li>
+<li>在线安装插件时，有部分插件需要用到<code>谷歌的服务</code>，这时候，需要配置代理。或者使用<code>离线安装</code></li>
+<li>常用插件<ul>
+<li>GitHub</li>
+<li>Git client</li>
+<li>GitLab</li>
+<li>Gitlab Authentication</li>
+<li>PAM Authentication</li>
+<li>Matrix Authorization Strategy</li>
+<li>Role-based Authorization Strategy</li>
+<li>LDAP</li>
+<li>SSH Slaves</li>
+<li>WMI Windows Agents</li>
+<li>Build Timeout</li>
+<li>Dashboard View</li>
+<li>Folders</li>
+<li>ThinBackup</li>
+<li>AnsiColor</li>
+<li>Build With Parameters</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建管理员</li>
+<li>配置全局的<code>Jenkins</code>的回调地址(也是<code>Jenkins</code>的登录地址)</li>
+</ol>
+<hr>
+<h2 id="三-备份Jenkins容器内部数据"><a href="#三-备份Jenkins容器内部数据" class="headerlink" title="三. 备份Jenkins容器内部数据"></a>三. 备份<code>Jenkins</code>容器内部数据</h2><ol>
+<li><p>使用<code>docker commit</code>进行备份</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ① 查找到当前运行的容器</span></span><br><span class="line">docker ps | grep jenkins</span><br><span class="line"><span class="comment"># ② commit 当前容器</span></span><br><span class="line">docker commit &lt;当前容器的ID&gt; &lt;镜像名称&gt; </span><br><span class="line"><span class="comment"># ③ 查看镜像</span></span><br><span class="line">docker images | grep &lt;镜像名称&gt;</span><br><span class="line"><span class="comment"># ④ 重启镜像</span></span><br><span class="line">docker run -itd -v /tmp:/tmp &lt;镜像名称&gt;</span><br><span class="line"><span class="comment"># ⑤ 查看容器名称</span></span><br><span class="line">docker ps | grep &lt;镜像名称&gt;</span><br><span class="line"><span class="comment"># ⑥ 使用交互式终端，连接到容器，使用容器内部的cp命令，把容器内部的/var/jenkins_home目录，拷贝到容器的/tmp目录下</span></span><br><span class="line">docker <span class="built_in">exec</span> -it &lt;容器名称&gt; cp -r /var/jenkins_home /tmp</span><br><span class="line"><span class="comment"># ⑦ 停止并删除容器</span></span><br><span class="line">docker stop &lt;容器名称&gt; &amp;&amp; docker rm &lt;容器名称&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用官方文档方式，进行备份</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm --volumes-from &lt;需要备份的容器名称&gt; -v /tmp/backup:/backup ubuntu tar cvf /backup/backup.tar /var/jenkins_home</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>docker cp</code>命令，快速备份</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ① 查看容器ID</span></span><br><span class="line">docker ps | grep &lt;容器名称&gt;</span><br><span class="line"><span class="comment"># ② 复制容器内部的 /var/jenkins_home 目录 到当前的 /tmp/目录下</span></span><br><span class="line">docker cp &lt;容器ID&gt;:/var/jenkins_home /tmp/</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<hr>
+<h2 id="四-Jenkins-使用-Gitlab-登录"><a href="#四-Jenkins-使用-Gitlab-登录" class="headerlink" title="四. Jenkins 使用 Gitlab 登录"></a>四. <code>Jenkins</code> 使用 <code>Gitlab</code> 登录</h2><ol>
+<li><p>进入<code>系统控制 &gt; 全局安全配置</code></p>
+</li>
+<li><p>在<code>授权策略</code>中，选中<code>Gitlab Commiter Authorization Strategy</code></p>
+</li>
+<li><p>配置 <code>Gitlab Authorization Settings</code></p>
+<img src="/2020/05/09/Jenkins/image-20200510214150990.png" class="">
+
+<p><em>注意：</em></p>
+<p>​     <em>1. <code>Admin User Names</code> 必须和 Gitlab 超级管理员的 <code>UserName</code>对应，否则会丢失超级管理员权限</em></p>
+</li>
+<li><p>在安全域中，选中 <code>Gitlab Authentication Plugin</code></p>
+<img src="/2020/05/09/Jenkins/image-20200510214548129.png" class="">
+
+<p><em>注意：</em></p>
+<p>​    <em>1.<code>Client ID</code>和<code>Client Secret</code>要在Gitlab中获取</em></p>
+<p>​    <em>2. <code>GitLab Web URI</code>和<code>GitLab API URI</code>为<code>GitLab链接</code></em></p>
+</li>
+<li><p>进入<code>Gitlab</code>，选择<code>管理中心</code>，进入<code>应用</code>，并新增应用</p>
+<img src="/2020/05/09/Jenkins/image-20200510214305886.png" class="">
+
+<p>注意：</p>
+<pre><code>1.  重定向URI 为：`&lt;jenkins地址&gt;/securityRealm/finishLogin`
+
+ 2.  必须要选中api</code></pre></li>
+<li><p>这时，我们会获取到<code>Client ID</code>和 <code>Client Secret</code></p>
+</li>
+<li><p>将得到的<code>Client ID</code>和<code>Client Secret</code>填充到<code>Jenkins</code>的安全域配置中</p>
+</li>
+</ol>
+<p><em>注意：</em></p>
+<p>​    <em>1.此时，如果还是无法登陆，需要在<code>Gitlab</code>的 <code>管理中心 &gt; 网络 &gt; 外发请求</code> 中，把<code>&lt;允许Webhook和服务对本地网络的请求&gt;</code>勾选上。</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/09/Jenkins/" data-id="cktdpmttw00021hag5zhp072x" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/10/jenkins-gitlab/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          jenkins&amp;gitlab
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/08/ESLint/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ESLint</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/05/14/redis/">Redis</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/13/MongoDB-config/">MongoDB-config</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/13/MongoDB/">MongoDB</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/12/Dockerfill-Gitlab-Jenkins/">Dockerfill-Gitlab-Jenkins</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/12/ssh-login/">ssh-login</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 damon chan<br>
+      
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
